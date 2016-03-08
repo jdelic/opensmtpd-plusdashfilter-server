@@ -1,3 +1,1 @@
-gevent==1.1.0
-gsmtpd==0.2
 daemonize==2.4.4

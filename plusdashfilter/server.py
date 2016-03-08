@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 import argparse
+import asyncore
 import daemonize
 import email.utils
-import gevent.monkey
 import smtplib
-from gsmtpd.server import SMTPServer
+from smtpd import SMTPServer
 
 
 _args = None
@@ -32,21 +32,21 @@ class PlusDashFilterServer(SMTPServer):
 
 
 def run():
-    server = PlusDashFilterServer(localaddr=(_args.input_ip, _args.output_ip))
-    server.serve_forever()
+    server = PlusDashFilterServer((_args.input_ip, _args.input_port), None)
+    asyncore.loop()
 
 
 def main():
-    gevent.monkey.patch_all()
-
-    _args = argparse.ArgumentParser(
+    global _args
+    parser = argparse.ArgumentParser(
                 description='This is a SMTP daemon that is used through OpenSMTPD configuration '
                             'to filter email and replace "-" with "+" thereby making OpenSMTPD '
                             'compatible with more widely deployed MTAs like qmail.'
-            )
+             )
 
-    grp_daemon = _args.add_argument_group('Daemon options')
-    grp_daemon.add_argument('-p', '--pidfile', dest='pidfile', default=None, help="Path to a pidfile")
+    grp_daemon = parser.add_argument_group('Daemon options')
+    grp_daemon.add_argument('-p', '--pidfile', dest='pidfile', default='./opensmtpd-plusdashfilter.pid',
+                            help="Path to a pidfile")
     grp_daemon.add_argument('-u', '--user', dest='user', default=None, help='Drop privileges and switch to this user')
     grp_daemon.add_argument('-g', '--group', dest='group', default=None,
                             help='Drop privileges and switch to this group')
@@ -57,7 +57,7 @@ def main():
     grp_daemon.add_argument('-C', '--chdir', dest='chdir', default='/',
                             help='Change working directory to the provided value')
 
-    grp_network = _args.add_argument_group('Network options')
+    grp_network = parser.add_argument_group('Network options')
     grp_network.add_argument('--input-ip', dest='input_ip', default='127.0.0.1', help='The network address to bind to')
     grp_network.add_argument('--input-port', dest='input_port', metavar='PORT', type=int, default=14001,
                              help='The port to bind to')
@@ -66,7 +66,7 @@ def main():
     grp_network.add_argument('--output-port', dest='output_port', metavar='PORT', type=int, default=14000,
                              help='THe port where OpenSMTPD listens for processed email')
 
-    _args.parse_args()
+    _args = parser.parse_args()
 
     d = daemonize.Daemonize(
             'plusdashfilterserver',
