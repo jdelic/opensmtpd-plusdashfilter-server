@@ -54,7 +54,7 @@ def main():
                             help='Stay in foreground, do not fork')
     grp_daemon.add_argument('-v', '--verbose', dest='verbose', default=False, action='store_true',
                             help='Output extra logging (not implemented right now)')
-    grp_daemon.add_argument('-C', '--chdir', dest='chdir', default='/',
+    grp_daemon.add_argument('-C', '--chdir', dest='chdir', default='.',
                             help='Change working directory to the provided value')
 
     grp_network = parser.add_argument_group('Network options')
