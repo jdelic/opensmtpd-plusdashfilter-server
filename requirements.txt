@@ -1,1 +1,1 @@
-daemonize==2.4.4
+python-daemon==2.1.1

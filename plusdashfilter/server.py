@@ -2,9 +2,10 @@
 
 import argparse
 import asyncore
-import daemonize
+import daemon
 import email.utils
 import smtplib
+import sys
 from smtpd import SMTPServer
 
 
@@ -33,6 +34,7 @@ class PlusDashFilterServer(SMTPServer):
 
 def run():
     server = PlusDashFilterServer((_args.input_ip, _args.input_port), None)
+    print("run")
     asyncore.loop()
 
 
@@ -50,8 +52,8 @@ def main():
     grp_daemon.add_argument('-u', '--user', dest='user', default=None, help='Drop privileges and switch to this user')
     grp_daemon.add_argument('-g', '--group', dest='group', default=None,
                             help='Drop privileges and switch to this group')
-    grp_daemon.add_argument('-f', '--foreground', dest='foreground', default=False, action='store_true',
-                            help='Stay in foreground, do not fork')
+    grp_daemon.add_argument('-d', '--daemonize', dest='daemonize', default=False, action='store_true',
+                            help='If set, fork into background')
     grp_daemon.add_argument('-v', '--verbose', dest='verbose', default=False, action='store_true',
                             help='Output extra logging (not implemented right now)')
     grp_daemon.add_argument('-C', '--chdir', dest='chdir', default='.',
@@ -68,17 +70,24 @@ def main():
 
     _args = parser.parse_args()
 
-    d = daemonize.Daemonize(
-            'plusdashfilterserver',
-            pid=_args.pidfile,
-            action=run,
-            user=_args.user,
-            group=_args.group,
-            verbose=_args.verbose,
-            foreground=_args.foreground,
-        )
+    pidfile = open(_args.pidfile, "w")
 
-    d.start()
+    ctx = daemon.DaemonContext(
+            working_directory=_args.chdir,
+            pidfile=pidfile,
+            uid=_args.user,
+            gid=_args.group,
+            detach_process=_args.daemonize,
+            files_preserve=[1, 2, 3, pidfile],
+            stdin=sys.stdin,
+            stdout=sys.stdout,
+            stderr=sys.stderr,
+    )
+
+    print("precontext")
+    with ctx:
+        print("in context")
+        run()
 
 
 if __name__ == '__main__':
