@@ -34,7 +34,6 @@ class PlusDashFilterServer(SMTPServer):
 
 def run():
     server = PlusDashFilterServer((_args.input_ip, _args.input_port), None)
-    print("run")
     asyncore.loop()
 
 
@@ -84,9 +83,7 @@ def main():
             stderr=sys.stderr,
     )
 
-    print("precontext")
     with ctx:
-        print("in context")
         run()
 
 
