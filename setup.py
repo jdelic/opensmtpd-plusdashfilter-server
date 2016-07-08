@@ -14,10 +14,13 @@ reqs_generator = parse_requirements(os.path.join(os.path.abspath(os.path.dirname
 reqs = [str(r.req) for r in reqs_generator]
 
 setup(
-        name='net.maurus.smtpplusdashfilter',
-        scripts=[
-        ],
-        version=_version,
-        packages=_packages,
-        install_requires=reqs,
+    name='net.maurus.smtpplusdashfilter',
+    entry_points = {
+        "console_scripts": [
+            "plusdashfilter = plusdashfilter.server:main"
+        ]
+    },
+    version=_version,
+    packages=_packages,
+    install_requires=reqs,
 )
