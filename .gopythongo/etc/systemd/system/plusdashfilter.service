@@ -1,0 +1,19 @@
+[Unit]
+Description=Makes it easy to migrate from Qmail to OpenSMTPD by converting qmail's "dashext" to opensmtpd's "plusext"
+ 
+[Service]
+Type=simple
+User=plusdashfilter
+Group=plusdashfilter
+# Load env vars from /etc/default/ and /etc/sysconfig/ if they exist.
+# Prefixing the path with '-' makes it try to load, but if the file doesn't
+# exist, it continues onward.
+EnvironmentFile=-/etc/default/plusdashfilter
+EnvironmentFile=-/etc/sysconfig/plusdashfilter
+ExecStart=/usr/local/plusdashfilter/bin/plusdashfilter --input-ip=$INPUT_IP --input-port=$INPUT_PORT --output-ip=$OUTPUT_IP --output-port=$OUTPUT_PORT" -p /run/plusdashfilter.pid
+Restart=always
+WorkingDirectory=/opt/plusdashfilter
+PIDFIle=/run/plusdashfilter.pid
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+-p opensmtpd-plusdashfilter_{{debian_version.version}}.deb
+-n opensmtpd-plusdashfilter
+--provides plusdashfilter
+-v "{{debian_version.version}}"
+-m "Jonas Maurus"
+-d python3 
+-d python3-pip
+-d python3-virtualenv
+--directories "{{basedir}}"
+--after-install .gopythongo/after_install.sh
+--before-remove .gopythongo/before_remove.sh
+--config-files /etc/default/plusdashfilter
+--config-files /etc/systemd/system/plusdashfilter.service
+{{basedir}} 
+.gopythongo/etc/systemd/system/plusdashfilter.service=/etc/systemd/system/plusdashfilter.service
+.gopythongo/etc/default/plusdashfilter=/etc/default/plusdashfilter
