@@ -10,6 +10,6 @@ if ! grep -q plusdashfilter /etc/passwd; then
     useradd -g plusdashfitler -s /bin/false -d /usr/local/plusdashfilter plusdashfilter
 fi
 
-systemctl --system daemon-relaod
+systemctl --system daemon-reload
 systemctl start plusdashfilter
 
