@@ -5,7 +5,7 @@ distribution=jessie
 # if you use your own package mirror, you MUST add the Debian release keys to
 # /etc/apt/trusted.gpg first, otherwise debootstrap will be unable to
 # authenticate the packages
-#   gpg --no-default-keyring --keyring /etc/apt/trusted.gpg --import #   /usr/share/keyrings/debian-archive-keyring.gpg
+#   gpg --no-default-keyring --keyring /root/mypackage_sign_pub.gpg --secret-keyring /root/mypackage_sign_secret.gpg --gen-key
 #
 # The following MUST be on one line. You also probably want to put this into
 # the PBUILDER_CREATE_OPTS environment variable on your build server.
@@ -30,7 +30,7 @@ aptly-distribution=jessie
 # The following MUST be on one line. You MOST LIKELY don't want to keep this
 # information in your source control, but really want to set the
 # APTLY_PUBLISH_OPTS environment variable on your build server instead.
-aptly-publish-opts=-architectures=amd64 -keyring=/root/plusdashfilter_sign.gpg -gpg-key=7E009DE756310F0A83F2 -passphrase-file=/root/plusdashfilter_dev_passphrase.txt
+aptly-publish-opts=-architectures=amd64 -keyring=/root/plusdashfilter_sign_pub.gpg -secret-keyring=/root/plusdashfilter_sign_secret.gpg -gpg-key=7E009DE756310F0A83F2 -passphrase-file=/root/plusdashfilter_dev_passphrase.txt
 
 # If you want to publish to S3, you must configure aptly with a AWS Key ID and
 # secret key in aptly.conf.
