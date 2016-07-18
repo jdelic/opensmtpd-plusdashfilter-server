@@ -30,7 +30,7 @@ aptly-distribution=jessie
 # The following MUST be on one line. You MOST LIKELY don't want to keep this
 # information in your source control, but really want to set the
 # APTLY_PUBLISH_OPTS environment variable on your build server instead.
-aptly-publish-opts=-architectures=amd64 -keyring=/root/plusdashfilter_sign_pub.gpg -secret-keyring=/root/plusdashfilter_sign_secret.gpg -gpg-key=7E009DE756310F0A83F2 -passphrase-file=/root/plusdashfilter_dev_passphrase.txt
+aptly-publish-opts=-architectures=amd64 -keyring=/root/plusdashfilter_sign_pub.gpg -secret-keyring=/root/plusdashfilter_sign_secret.gpg -gpg-key=0505CF39B754AD8F407E7E009DE756310F0A83F2 -passphrase-file=/root/plusdashfilter_dev_passphrase.txt
 
 # If you want to publish to S3, you must configure aptly with a AWS Key ID and
 # secret key in aptly.conf.
