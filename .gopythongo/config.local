@@ -1,6 +1,8 @@
 
 builder=docker
 docker-buildfile=.gopythongo/Dockerfile.jinja.build
+docker-buildarg=[APTSRCHOST=192.168.56.10 fileserver.maurusnet.test,APTSRCDEF=deb http://fileserver.maurusnet.test/debian/ jessie main]
+dockerfile-var=APTKEYURL=http://fileserver.maurusnet.test/dev_apt_signing.public.pgp
 
 # if you use your own package mirror, you MUST add the Debian release keys to
 # /etc/apt/trusted.gpg first, otherwise debootstrap will be unable to
