@@ -7,7 +7,7 @@ if ! grep -q plusdashfilter /etc/group; then
 fi
 
 if ! grep -q plusdashfilter /etc/passwd; then
-    useradd -g plusdashfitler -s /bin/false -d /usr/local/plusdashfilter plusdashfilter
+    useradd -g plusdashfilter -s /bin/false -d /usr/local/plusdashfilter plusdashfilter
 fi
 
 systemctl --system daemon-reload
