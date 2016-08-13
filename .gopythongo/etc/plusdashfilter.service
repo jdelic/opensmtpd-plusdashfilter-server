@@ -1,5 +1,5 @@
 [Unit]
-Description=Makes it easy to migrate from Qmail to OpenSMTPD by converting qmail's "dashext" to opensmtpd's "plusext"
+Description=plusdashfilter - qmail dashext to opensmtpd plusext
 
 [Service]
 Type=simple
@@ -9,7 +9,7 @@ Group=plusdashfilter
 # Prefixing the path with '-' makes it try to load, but if the file doesn't
 # exist, it continues onward.
 EnvironmentFile=-/etc/default/plusdashfilter
-ExecStart=/usr/local/plusdashfilter/bin/plusdashfilter --input-ip=$INPUT_IP --input-port=$INPUT_PORT --output-ip=$OUTPUT_IP --output-port=$OUTPUT_PORT" -p /run/plusdashfilter.pid
+ExecStart=/usr/local/plusdashfilter/bin/plusdashfilter --input-ip=$INPUT_IP --input-port=$INPUT_PORT --output-ip=$OUTPUT_IP --output-port=$OUTPUT_PORT -p /run/plusdashfilter.pid
 Restart=on-failure
 WorkingDirectory=/usr/local/plusdashfilter
 PIDFIle=/run/plusdashfilter.pid
