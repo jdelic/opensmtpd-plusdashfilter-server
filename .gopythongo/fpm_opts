@@ -13,6 +13,5 @@
 --config-files /etc/default/plusdashfilter
 --deb-systemd .gopythongo/etc/plusdashfilter.service
 {{basedir}}
-/run/plusdashfilter
 .gopythongo/etc/default/plusdashfilter=/etc/default/plusdashfilter
 .gopythongo/etc/tmpfiles.d/plusdashfilter.conf=/usr/lib/tmpfiles.d/plusdashfilter.conf
