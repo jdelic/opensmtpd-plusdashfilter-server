@@ -11,7 +11,7 @@ Group=plusdashfilter
 EnvironmentFile=-/etc/default/plusdashfilter
 ExecStart=/usr/local/plusdashfilter/bin/plusdashfilter --input-ip=$INPUT_IP --input-port=$INPUT_PORT --output-ip=$OUTPUT_IP --output-port=$OUTPUT_PORT" -p /run/plusdashfilter.pid
 Restart=on-failure
-WorkingDirectory=/opt/plusdashfilter
+WorkingDirectory=/usr/local/plusdashfilter
 PIDFIle=/run/plusdashfilter.pid
 
 [Install]
