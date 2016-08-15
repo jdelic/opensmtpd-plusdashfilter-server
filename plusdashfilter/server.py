@@ -13,8 +13,8 @@ _args = None
 
 
 class PlusDashFilterServer(SMTPServer):
-    def process_message(self, peer, mailfrom, rcpttos, data):
-        rewritten_rcptros = []
+    def process_message(self, peer, mailfrom, rcpttos, data, **kwargs):
+        rewritten_rcpttos = []
 
         # replace all "-" in email user parts with "+" for OpenSMTPD
         for recipient in rcpttos:
@@ -23,13 +23,13 @@ class PlusDashFilterServer(SMTPServer):
                 new_address = '%s@%s' % (name_address[1].split('@')[0].replace('-', '+'),
                                          name_address[1].split('@')[1])
                 name_address = (name_address[0], new_address)
-                rewritten_rcptros.append(email.utils.formataddr(name_address))
+                rewritten_rcpttos.append(email.utils.formataddr(name_address))
             else:
-                rewritten_rcptros.append(recipient)
+                rewritten_rcpttos.append(recipient)
 
         # now send the mail back to be processed
         with smtplib.SMTP(_args.output_ip, _args.output_port) as smtp:
-            smtp.sendmail(mailfrom, rewritten_rcptros, data)
+            smtp.sendmail(mailfrom, rewritten_rcpttos, data)
 
 
 def run():
