@@ -1,4 +1,4 @@
-You probably want to use [opensmtpd-plusdashfilter](https://github.com/jdelic/opensmtpd-plusdashfilter) instead.
+You probably want to use [opensmtpd-extras-plusdash](https://github.com/jdelic/opensmtpd-plusdashfilter) instead.
 
 # OpenSMTPD-plusdashfilter
 
