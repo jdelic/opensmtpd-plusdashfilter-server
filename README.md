@@ -1,3 +1,5 @@
+You probably want to use [opensmtpd-plusdashfilter](https://github.com/jdelic/opensmtpd-plusdashfilter) instead.
+
 # OpenSMTPD-plusdashfilter
 
 So it turns out that OpenSMTPD, for boneheaded reasons, does not support
