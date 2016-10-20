@@ -6,6 +6,9 @@ check whether a recipient is valid with qmail's dashext syntax and still
 being able to deny the email in the ongoing SMTP session. So this approach
 only works if you're willing to accept all email and bounce/drop it later.
 
+I'm keeping this repository around as an example for writing a simple
+Python-based SMTP filter for OpenSMTPD though.
+
 You probably want to use [opensmtpd-extras-plusdash](https://github.com/jdelic/opensmtpd-plusdashfilter) 
 instead if OpenSMTPD extends its filter API to allow filters to rewrite
 envelope data.
