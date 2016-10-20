@@ -1,7 +1,10 @@
 # I have abandoned this
 
-Since I will need to rewrite SMTP envelope data (`RCPT TO`) as well and 
-OpenSMTPD does not allow that currently.
+The main problem is that OpenSMTPD will only relay email to this filter
+server once it has been already received. This makes it impossible to 
+check whether a recipient is valid with qmail's dashext syntax and still
+being able to deny the email in the ongoing SMTP session. So this approach
+only works if you're willing to accept all email and bounce/drop it later.
 
 You probably want to use [opensmtpd-extras-plusdash](https://github.com/jdelic/opensmtpd-plusdashfilter) 
 instead if OpenSMTPD extends its filter API to allow filters to rewrite
