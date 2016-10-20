@@ -1,4 +1,11 @@
-You probably want to use [opensmtpd-extras-plusdash](https://github.com/jdelic/opensmtpd-plusdashfilter) instead.
+# I have abandoned this
+
+Since I will need to rewrite SMTP envelope data (`RCPT TO`) as well and 
+OpenSMTPD does not allow that currently.
+
+You probably want to use [opensmtpd-extras-plusdash](https://github.com/jdelic/opensmtpd-plusdashfilter) 
+instead if OpenSMTPD extends its filter API to allow filters to rewrite
+envelope data.
 
 # OpenSMTPD-plusdashfilter
 
